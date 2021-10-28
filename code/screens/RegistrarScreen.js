@@ -12,8 +12,10 @@ export default function RegistrarScreen({ navigation, logado }) {
     formState: { errors },
   } = useForm();
 
-  const pressionaEntrar = () => {
-    navigation.navigate('Home');
+  const pressionaEntrar = (values) => {
+    console.log(values); // chama login
+    setUsuario({ logado: true, nome: 'Maycon' });
+    navigation.navigate('Home')
   };
 
   const pressionaRegistrar = () => {

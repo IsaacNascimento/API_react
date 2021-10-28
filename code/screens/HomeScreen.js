@@ -13,42 +13,56 @@ import {
   useColorScheme,
 } from 'react-native';
 
-import { FAB, Icon } from 'react-native-elements';
-
-import Item from '../components/Item'
-
-export default function HomeScreen({navigation}) {
-  const dados = [
-    { id: '1', titulo: ''    , descricao: '' },
-    { id: '2', titulo: ''    , descricao: '' },
-    { id: '3', titulo: ''    , descricao: '' },
-    { id: '4', titulo: ''    , descricao: '' },
-    { id: '5', titulo: ''    , descricao: '' },
-  ];
-
-  const pressionaFAB = () => {
-    navigation.navigate("Contatos");
+export default function HomeScreen({ navigation }) {
+  const pressionaDetalhes = () => {
+    navigation.navigate('Detalhes');
   };
 
-  return (
-    <View style={{ flex: 1 }}>
-     <View style={styles.container}>
-       <View style={{ alignItems: 'center' }}>
-        </View>
-     </View>
-     
-     <FlatList data={dados} 
-              renderItem={Item}
-              keyExtractor={(item) => item.id}
-    /> 
 
-    <FAB
-        placement="right"
-        color="red"
-        icon={<Icon name="add" color="white"/>}
-        onPress={pressionaFAB}
-        style={styles.btn}
-      />
+  return (
+    <View style={styles.container}>
+      <View style={{ alignItems: 'end' }}>
+        <Text style={{ paddingEnd: 12 }}>titulo principal da noticia</Text>
+      </View>
+      <View style={{}} onPress={pressionaDetalhes}>
+        <Image
+          style={{
+            height: 100,
+            width: 100,
+            alignItems: 'start',
+            marginBottom: 18,
+          }}
+          source={require('../assets/img_login.jpg')}
+        />
+      </View>
+            <View style={{ alignItems: 'end' }}>
+        <Text style={{ paddingEnd: 12 }}>titulo principal da noticia</Text>
+      </View>
+      <View style={{}}>
+        <Image
+          style={{
+            height: 100,
+            width: 100,
+            alignItems: 'start',
+            marginBottom: 18,
+          }}
+          source={require('../assets/img_login.jpg')}
+        />
+      </View>
+            <View style={{ alignItems: 'end' }}>
+        <Text style={{ paddingEnd: 12 }}>titulo principal da noticia</Text>
+      </View>
+      <View style={{}}>
+        <Image
+          style={{
+            height: 100,
+            width: 100,
+            alignItems: 'start',
+            marginBottom: 18,
+          }}
+          source={require('../assets/img_login.jpg')}
+        />
+      </View>
     </View>
   );
 }
@@ -58,7 +72,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     flex: 1,
     flexDirection: 'column',
-    // justifyContent: 'flex-end',
     padding: 8,
   },
 });

@@ -15,6 +15,7 @@ export default function LoginScreen({ navigation, logado }) {
   const pressionaEntrar = (values) => {
     console.log(values); // chama login
     setUsuario({ logado: true, nome: 'Maycon' });
+    navigation.navigate('Home')
   };
 
   const pressionaRegistrar = () => {
@@ -61,7 +62,6 @@ export default function LoginScreen({ navigation, logado }) {
                 style={styles.campo}
                 autoCapitalize={false}
                 secureTextEntry={true}
-                placeholder="senha"
                 value={value}
                 onChangeText={(text) => onChange(text)}
               />
