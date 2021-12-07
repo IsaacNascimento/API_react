@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Alert,
   Button,
@@ -13,38 +13,88 @@ import {
   useColorScheme,
 } from 'react-native';
 
-export default function DetalhesScreen({ navigation }) {
-  const pressionaFAB = () => {
+import firebase from 'firebase';
+
+export default function DetalhesScreen({ navigation, route }) {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+
+  const { id } = route.params; 
+
+  const apagar = () => {
+    const docref = firebase
+      .firestore()
+      .collection('Contatos')
+      .doc(id);
+    docref.delete( );
     navigation.navigate('Contatos');
   };
 
+  const salvar = () => {
+    const docref = firebase
+      .firestore()
+      .collection('Contatos')
+      .doc(id);
+    docref.set({
+      nome: nome,
+      email: email,
+    });
+    navigation.navigate('Contatos');
+  };
+
+  useEffect(async() => {
+    const docref = firebase
+      .firestore()
+      .collection('Contatos')
+      .doc(id);
+    const doc = await docref.get();
+    const {nome, email} = doc.data();
+    setNome(nome);
+    setEmail(email);
+  }, [id]);
+
+ 
+
   return (
-    <View style={styles.container}>
-      <View style={{ alignItems: 'center', marginBottom: 18, }}>
-        <Text>titulo principal da noticia</Text>
+    <View style={styles.conteudo}>
+      <TextInput
+        style={styles.campo}
+        autoCapitalize={true}
+        placeholder="Nome"
+        value={nome}
+        onChangeText={(text) => setNome(text)}
+      />
+      <TextInput
+        style={styles.campo}
+        autoCapitalize={false}
+        keyboardType="email-address"
+        placeholder="E-mail"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
+      <View style={styles.botao}>
+        <Button title="Apagar" color="red" onPress={apagar} />
       </View>
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <Image
-          style={{
-            height: 100,
-            width: 100,
-            marginBottom: 18,
-          }}
-          source={require('../assets/img_login.jpg')}
-        />
-      </View>
-      <View style={{ paddingEnd: 10, paddingLeft: 10, marginBottom: 18, }}>     
-        <Text style={{}}>descrição da noticia inteira ou a informação completa afasf fasfasf fasfasf af asf asfasfasfaf afasfafasfa afasfa</Text>
+      <View>
+        <Button title="Salvar" color="red" onPress={salvar} />
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#ecf0f1',
+  conteudo: {
     flex: 1,
-    flexDirection: 'column',
+    justifyContent: 'center',
     padding: 8,
+  },
+  campo: {
+    marginBottom: 16,
+    padding: 10,
+    borderBottomColor: '#bbb',
+    borderBottomWidth: 1,
+  },
+  botao: {
+    marginBottom: 16,
   },
 });

@@ -4,7 +4,13 @@ import { useForm, Controller } from 'react-hook-form';
 
 import { UserContext } from '../context/UserContext';
 
+import firebase from 'firebase';
+// const firebase = require('firebase/app');
+// require('firebase/<PACKAGE>');
+
 export default function LoginScreen({ navigation, logado }) {
+
+  
   const [usuario, setUsuario] = useContext(UserContext);
   const {
     control,
@@ -13,9 +19,17 @@ export default function LoginScreen({ navigation, logado }) {
   } = useForm();
 
   const pressionaEntrar = (values) => {
-    console.log(values); // chama login
-    setUsuario({ logado: true, nome: 'Maycon' });
-    navigation.navigate('Home')
+    firebase
+     .auth()
+     .signInWithEmailAndPassword(values.email, values.senha)
+     .then(userCredential => {
+       setUsuario({ logado: true, nome: userCredential.user.displayName})
+     })
+     .catch(error => {
+       console.log(error.message)
+     });
+  setUsuario({ logado: true, nome: 'Maycon' });
+  navigation.navigate('Home')
   };
 
   const pressionaRegistrar = () => {

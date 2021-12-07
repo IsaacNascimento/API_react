@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, TextInput, View, Image } from 'react-native';
 
+
+
 export default function InicioScreen({ navigation, logado }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
   const pressionaEntrar = () => {
+    
     navigation.navigate('Login');
   };
 
@@ -16,7 +19,7 @@ export default function InicioScreen({ navigation, logado }) {
   return (
     <View style={styles.conteudo}>
        <View style={{ alignItems: 'center' }}>
-         <Image style={{ height: 150, width: 150, alignItems: 'center', marginBottom: 18}} source={require('../assets/img_login.jpg')}/>
+         <Image style={{ height: 180, width: 250, alignItems: 'center', marginBottom: 18}} source={require('../assets/img_tela_inicio.jfif')}/>
       </View>
       <View style={styles.botao}>
         <Button title="Entrar" color="black" onPress={pressionaEntrar} />

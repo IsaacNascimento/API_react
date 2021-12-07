@@ -4,7 +4,12 @@ import { useForm, Controller } from 'react-hook-form';
 
 import { UserContext } from '../context/UserContext';
 
+import firebase from 'firebase';
+
 export default function RegistrarScreen({ navigation, logado }) {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
   const [usuario, setUsuario] = useContext(UserContext);
   const {
     control,
@@ -12,13 +17,18 @@ export default function RegistrarScreen({ navigation, logado }) {
     formState: { errors },
   } = useForm();
 
-  const pressionaEntrar = (values) => {
-    console.log(values); // chama login
-    setUsuario({ logado: true, nome: 'Maycon' });
-    navigation.navigate('Home')
+  const pressionaRegistrar = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, senha)
+      .then((userCredential) => {
+        setUsuario({ logado: true, nome: nome });
+        return userCredential.user.updateProfile({ displayName: nome });
+      })
+      .catch((error) => alert(error.message));
   };
 
-  const pressionaRegistrar = () => {
+  const entreNaSuaConta = () => {
     navigation.navigate('Login');
   };
 
@@ -91,12 +101,17 @@ export default function RegistrarScreen({ navigation, logado }) {
           )}
         </View>
         <View style={styles.botao}>
-          <Button title="Cadastrar" color="red" onPress={handleSubmit(pressionaEntrar)} />
+          <Button
+            title="Cadastrar"
+            color="red"
+            onPress={handleSubmit(pressionaRegistrar)}
+          />
         </View>
+        
       </View>
       <View>
         <View style={styles.cadestre}>
-          <Text style={{ color: 'red' }} onPress={pressionaRegistrar}>
+          <Text style={{ color: 'red' }} onPress={entreNaSuaConta}>
             Entre na sua conta!
           </Text>
         </View>
@@ -112,7 +127,7 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingLeft: 20,
     paddingEnd: 20,
-    marginTop: 150,
+    marginTop: 80,
   },
   campo: {
     marginBottom: 10,
@@ -126,6 +141,8 @@ const styles = StyleSheet.create({
     paddingLeft: 45,
     paddingEnd: 45,
     padding: 20,
+    paddingBottom: 2,
+    paddingTop: 8
   },
   paragraph: {
     marginBottom: 0,
@@ -134,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     textAlign: 'center',
     height: 50,
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   paragra: {
     marginTop: 3,
@@ -143,7 +160,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'left',
-    
   },
   meio: {
     paddingLeft: 20,

@@ -15,7 +15,7 @@ import {
 
 import { Avatar } from 'react-native-elements';
 
-export default function Item(props) {
+export default function Item({ props }) {
   return (
     <View style={styles.item}>
         <Image 
@@ -27,7 +27,7 @@ export default function Item(props) {
          source={require('../assets/img_login.jpg')} 
          />
         <Text style={{paddingLeft: 8}}>{props.item.nome}</Text>
-        <Text style={{paddingLeft: 8}}>{props.item.fone}</Text>
+        <Text style={{paddingLeft: 8}}>{props.item.email}</Text>
     </View>
   );
 }

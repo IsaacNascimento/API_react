@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Button, StyleSheet, TextInput, View, Image, Text } from 'react-native';
+
 import { UserContext } from '../context/UserContext';
 
 import LoginScreen from '../screens/LoginScreen';
@@ -12,6 +14,7 @@ import InicioScreen from '../screens/InicioScreen';
 
 import ContatosScreen from '../screens/ContatosScreen';
 import DetalhesScreen from '../screens/DetalheScreen';
+import NovoScreen from '../screens/NovoScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +26,7 @@ export default function MainNavigator() {
     <NavigationContainer independent={true}>
       {usuario.logado ? (
         <Tab.Navigator initialRouteName="Login">
+            
           <Tab.Screen
             name="Home"
             component={HomeScreen}
@@ -32,8 +36,9 @@ export default function MainNavigator() {
                 fontWeight: 'bold',
                 fontsize: 16,
                 color: 'black',
-              },
+              },  
             }}
+            
           />
           <Tab.Screen
             name="Contatos"
@@ -51,6 +56,19 @@ export default function MainNavigator() {
             <Stack.Screen
               name="Detalhes"
               component={DetalhesScreen}
+              options={{
+                headerStyle: { backgroundColor: 'red' },
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                  fontsize: 16,
+                  color: 'black',
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="Novo"
+              component={NovoScreen}
               options={{
                 headerStyle: { backgroundColor: 'red' },
                 headerTitleStyle: {
