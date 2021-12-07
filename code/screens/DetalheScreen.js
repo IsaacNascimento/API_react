@@ -26,19 +26,11 @@ export default function DetalhesScreen({ navigation, route }) {
       .firestore()
       .collection('Contatos')
       .doc(id);
-    docref.delete( );
+    docref.delete();
     navigation.navigate('Contatos');
   };
 
   const salvar = () => {
-    const docref = firebase
-      .firestore()
-      .collection('Contatos')
-      .doc(id);
-    docref.set({
-      nome: nome,
-      email: email,
-    });
     navigation.navigate('Contatos');
   };
 

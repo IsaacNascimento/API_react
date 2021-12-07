@@ -101,7 +101,7 @@ export default function HomeScreen({ navigation }) {
         </Text>
       </View>
       <View>
-        <Button title="Sair" onPress={pressionaSair} />
+        <Button color="red" title="Sair" onPress={pressionaSair} />
       </View>
     </ScrollView>
    
