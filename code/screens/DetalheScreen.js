@@ -20,19 +20,21 @@ export default function DetalhesScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={{ alignItems: 'end' }}>
-        <Text style={{ paddingEnd: 12 }}>titulo principal da noticia</Text>
+      <View style={{ alignItems: 'center', marginBottom: 18, }}>
+        <Text>titulo principal da noticia</Text>
       </View>
-      <View style={{}}>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <Image
           style={{
             height: 100,
             width: 100,
-            alignItems: 'start',
             marginBottom: 18,
           }}
           source={require('../assets/img_login.jpg')}
         />
+      </View>
+      <View style={{ paddingEnd: 10, paddingLeft: 10, marginBottom: 18, }}>     
+        <Text style={{}}>descrição da noticia inteira ou a informação completa afasf fasfasf fasfasf af asf asfasfasfaf afasfafasfa afasfa</Text>
       </View>
     </View>
   );
