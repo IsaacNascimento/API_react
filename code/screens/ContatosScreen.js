@@ -9,11 +9,8 @@ import {
   Image,
 } from 'react-native';
 import { Header, Icon, FAB } from 'react-native-elements';
-
 // import Item from '../components/Item';
-
 import firebase from 'firebase';
-
 export default function ContatosScreen({ navigation }) {
   const [dados, setDados] = useState([]);
 
@@ -24,7 +21,6 @@ export default function ContatosScreen({ navigation }) {
   const pressionarItem = (id) => {
     navigation.navigate('Detalhes', { id: id });
   };
-
   useEffect(() => {
     const contatos = [];
     firebase
@@ -43,7 +39,6 @@ export default function ContatosScreen({ navigation }) {
         setDados([...contatos]);
       });
   }, [setDados]);
-
   const Item = ({ item }) => {
     return (
       <Pressable onPress={() => {pressionarItem(item.id)}}>
@@ -56,17 +51,12 @@ export default function ContatosScreen({ navigation }) {
             }}
             source={require('../assets/user.png')}
           />
-        <View style={styles.item2}>
-          <Text style={{ paddingStart: 2, }}>{item.nome}</Text>
-        </View>
-        <View style={styles.item3}>
-          <Text style={{ paddingLeft: 140, }}>{item.email}</Text>
-        </View>
+          <Text style={{ paddingLeft: 0 }}>{item.nome}</Text>
+          <Text style={{ paddingLeft: 8 }}>{item.email}</Text>
         </View>
       </Pressable>
     );
   };
-
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.lista}>
@@ -74,7 +64,7 @@ export default function ContatosScreen({ navigation }) {
           data={dados}
           renderItem={Item}
           keyExtractor={(item) => item.id}
-       />
+        />
       </View>
 
       <FAB
@@ -93,16 +83,9 @@ const styles = StyleSheet.create({
   },
   item: {
     flexDirection: 'row',
-    minWidth: "100%",
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 15,
+    padding: 8,
     borderBottomWidth: 1,
   },
-  item2: {
-    justifyContent: 'flex-start',
-  },
-  item3: {
-    //justifyContent: 'flex-end',
-    paddingEnd: 12
-  },
-});
+})

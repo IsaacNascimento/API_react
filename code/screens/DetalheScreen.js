@@ -12,25 +12,29 @@ import {
   FlatList,
   useColorScheme,
 } from 'react-native';
-
 import firebase from 'firebase';
-
 export default function DetalhesScreen({ navigation, route }) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-
   const { id } = route.params; 
-
   const apagar = () => {
     const docref = firebase
       .firestore()
       .collection('Contatos')
       .doc(id);
-    docref.delete();
+    docref.delete( );
     navigation.navigate('Contatos');
   };
 
   const salvar = () => {
+    const docref = firebase
+      .firestore()
+      .collection('Contatos')
+      .doc(id);
+    docref.set({
+      nome: nome,
+      email: email,
+    });
     navigation.navigate('Contatos');
   };
 
@@ -44,9 +48,7 @@ export default function DetalhesScreen({ navigation, route }) {
     setNome(nome);
     setEmail(email);
   }, [id]);
-
  
-
   return (
     <View style={styles.conteudo}>
       <TextInput
@@ -73,7 +75,6 @@ export default function DetalhesScreen({ navigation, route }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   conteudo: {
     flex: 1,

@@ -61,7 +61,7 @@ export default function MainNavigator() {
             },
           })}
           tabBarOptions={{
-            activeTintColor: '#ff4500',
+            activeTintColor: 'red',
             inactiveTintColor: '#000000',
           }}
           initialRouteName="Login">

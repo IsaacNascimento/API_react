@@ -25,10 +25,10 @@
     "@react-navigation/native": "*",
     "react-native-vector-icons": "*",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-linear-gradient": "*",
     "@react-navigation/bottom-tabs": "*",
     "@react-navigation/native-stack": "*",
-    "react-native-safe-area-context": "3.3.2",
-    "react-native-linear-gradient": "*"
+    "react-native-safe-area-context": "3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
